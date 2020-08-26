@@ -1,0 +1,2 @@
+<!--pages/user/user.wxml-->
+<text wx:if="{{isReady}}">你好, {{realName}}先生</text>
