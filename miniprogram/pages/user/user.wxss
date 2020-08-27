@@ -9,7 +9,25 @@
   z-index: 99;
   overflow: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+.layout-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(3px);
+  /* filter: brightness(0); */
+  /* opacity: 0; */
+  animation: filterToFade .3s ease-in both;
+}
+.open-tip {
+  padding: 10rpx;
+  font-size: 36rpx;
+  color: #fff;
 }
 .open-btn {
   opacity: 0;
@@ -25,4 +43,52 @@
   justify-content: center;
   box-shadow: 0 0 5px #555, 0 2px rgb(223, 128, 20) inset;
   border: 2px solid rgb(223, 219, 20);
+  animation: scaleInOut 3s ease infinite both;
+}
+
+/* 信封 */
+.poster {
+  background-color: #fff;
+  margin: 32rpx 16rpx;
+  border-radius: 8rpx;
+  padding: 10rpx 32rpx;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.guest {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #555;
+  padding: 0 6px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.male, .female {
+  font-weight: bold;
+  padding: 0 10rpx;
+}
+.male {
+  color: rgb(31, 37, 94);
+}
+.female {
+  color: rgb(131, 28, 45);
+}
+
+@keyframes scaleInOut {
+  0%, 100% {
+    transform: scale(1.1)
+  }
+  50% {
+    transform: scale(0.9);
+  }
+}
+
+@keyframes filterToFade {
+  from {
+    /* filter: blur(10px); */
+    opacity: 0;
+  }
+  to {
+    /* filter: blur(2px); */
+    opacity: .1;
+  }
 }

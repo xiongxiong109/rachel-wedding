@@ -16,8 +16,19 @@ exports.main = async (event, context) => {
 
   // 已经存在数据
   if (hasInvited.data && hasInvited.data.length) {
+    
+    // 更新该数据为accepted
+    await userInvite.where({
+      openid: _.eq(event.openid)
+    }).update({
+      data: {
+        isAccepted: true
+      }
+    })
+
     return {
-      isInvited: true
+      isInvited: true,
+      isAccepted: hasInvited.data[0].isAccepted
     }
   } else {
     const rst = await userInvite.add({

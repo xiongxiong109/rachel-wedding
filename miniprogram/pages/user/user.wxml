@@ -1,15 +1,27 @@
+<!-- loading layout -->
+<view class="loading-layout"></view>
 <!-- 封面 -->
-<view class="index-page" wx-if="{{isShowInvite}}">
+<view
+  class="index-page"
+  wx-if="{{isShowInvite}}"
+  animation="{{indexAni}}"
+  bind:transitionend="onLayoutEnd"
+>
+  <image src="../../images/layout.png" class="layout-img" mode="aspectFill"></image>
   <button
     open-type="getUserInfo"
     bindgetuserinfo="getUserInfo"
     class="open-btn"
     animation="{{fadeIn}}"
   >启</button>
+  <text class="open-tip">来自熊剑桥的邀请</text>
 </view>
 <!-- 邀请正文 -->
 <view wx:if="{{isReady}}">
-  <text wx:if="{{isReady}}">你好, {{realName}}, 邀请您参加</text>
+  <view class="poster" wx:if="{{isReady}}">
+    <text>您好, <text class="guest">{{realName}}</text>: \n</text>
+    <text class="pra">真挚地邀请您参加<text class="male">熊剑桥</text>先生与<text class="female">曹巧媛</text>女士的婚礼</text>
+  </view>
   <button bindtap="showMap">查看宴会地点</button>
   <view wx:if="{{!isInvited}}">
      <button wx:if="{{isShowAccept}}" bindtap="onAccept">朕知道了</button>

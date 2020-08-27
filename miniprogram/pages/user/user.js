@@ -24,7 +24,7 @@ Page({
   setOpenId: async function() {
 
     wx.showToast({
-      title: '',
+      title: '熊仔正在初始化',
       icon: 'loading'
     })
 
@@ -70,6 +70,13 @@ Page({
       duration: 400,
       timingFunction: 'ease-in-out'
     })
+
+    this.indexAnimation = wx.createAnimation({
+      delay: 0,
+      duration: 1e3,
+      timingFunction: 'ease-out'
+    })
+
   },
 
   showInviteBtn: function() {
@@ -89,7 +96,7 @@ Page({
 
   queryUserMap: function(res) {
     this.setData({
-      isShowInvite: false,
+      // isShowInvite: false,
       avatarUrl: res.userInfo.avatarUrl,
       userInfo: res.userInfo
     })
@@ -154,9 +161,30 @@ Page({
 
   getUserInfo: function(res) {
     if (res.detail && res.detail.userInfo) {
+      this.animateOutIndex();
       this.queryUserMap(res.detail)
     }
   },
+
+  // 封面消失动画
+  animateOutIndex: function() {
+    this.indexAnimation.scale(6).opacity(0).step();
+    this.fadeInAnimation.opacity(0).step({
+      duration: 0
+    }).step()
+
+    this.setData({
+      indexAni: this.indexAnimation.export(),
+      fadeIn: this.fadeInAnimation.export()
+    })
+  },
+
+  onLayoutEnd: function() {
+    this.setData({
+      isShowInvite: false
+    })
+  },
+
   checkIsInvited: async function() {
     const rst = await wx.cloud.callFunction({
       name: 'query_invite_user',
@@ -210,7 +238,6 @@ Page({
   },
 
   showMap: function() {
-    // console.log('show')
     wx.openLocation({
       type: 'wgs84',
       latitude: 30.42832782422223,
