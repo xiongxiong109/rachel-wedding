@@ -155,7 +155,10 @@ Page({
   // 在邀请栏中插入数据
   onAccept: async function() {
     // 查询是否已经接受过邀请
-
+    wx.showToast({
+      title: 'loading',
+      icon: 'loading'
+    })
     // 获取openid
     const loginInfo = await wx.cloud.callFunction({
       name: 'login',
@@ -169,6 +172,8 @@ Page({
         realName: this.data.realName
       }
     })
+    wx.hideToast();
+
     this.setData({
       isInvited: true,
       isShowAccept: false
