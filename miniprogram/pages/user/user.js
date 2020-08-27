@@ -189,12 +189,12 @@ Page({
       name: '贵枝花园酒店',
       address: '宜昌市枝江市迎宾大道91号'
     })
-  }
+  },
 
   /**
    * 用户点击右上角分享
    */
-  // onShareAppMessage: function () {
-  //   // return null
-  // }
+  onShareAppMessage: function () {
+    // return null
+  }
 })
