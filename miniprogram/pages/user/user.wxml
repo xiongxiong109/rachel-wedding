@@ -1,2 +1,20 @@
 <!--pages/user/user.wxml-->
-<text wx:if="{{isReady}}">你好, {{realName}}先生</text>
+<view class="index-page" wx-if="{{isShowInvite}}">
+  <button
+    open-type="getUserInfo"
+    bindgetuserinfo="getUserInfo"
+    class="open-btn"
+    animation="{{fadeIn}}"
+  >邀请函</button>
+</view>
+<view wx:if="{{isReady}}">
+  <text wx:if="{{isReady}}">你好, {{realName}}先生, 邀请您参加婚礼</text>
+  <button bindtap="showMap">查看宴会地点</button>
+  <view wx:if="{{!isInvited}}">
+     <button wx:if="{{isShowAccept}}" bindtap="onAccept">朕知道了</button>
+  </view>
+  <view wx:else>
+    <text>您已接受邀请</text>
+    <button>取消</button>
+  </view>
+</view>

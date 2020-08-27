@@ -1,1 +1,28 @@
 /* pages/user/user.wxss */
+.index-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(194, 71, 71);
+  z-index: 99;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.open-btn {
+  opacity: 0;
+  padding: 0;
+  background-color: rgb(224, 222, 75);
+  max-width: 200rpx;
+  width: 200rpx;
+  height: 200rpx;
+  max-height: 200rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px #555, 0 2px rgb(223, 128, 20) inset;
+  border: 2px solid rgb(223, 219, 20);
+}

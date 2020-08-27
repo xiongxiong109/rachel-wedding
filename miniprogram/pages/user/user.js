@@ -5,6 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isShowInvite: false, // 是否展示邀请按钮
+    isReady: false,
+    isShowAccept: false, // 是否展示接受按钮
+    isInvited: false,
     userInfo: {}
   },
 
@@ -12,37 +16,75 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // console.log(options)
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
-            success: this.queryUserMap
+            success: this.queryUserMap,
+            fail: function() {
+              this.showInviteBtn()
+            }
           })
+        } else {
+          this.showInviteBtn()
         }
+      },
+      fail: function() {
+        this.setData({
+          isShowInvite: true
+        })
       }
     })
+    this.initAnimation()
+  },
+
+  initAnimation: function() {
+    this.fadeInAnimation = wx.createAnimation({
+      delay: 0,
+      duration: 400,
+      timingFunction: 'ease-in-out'
+    })
+  },
+
+  showInviteBtn: function() {
+
+    this.setData({
+      isShowInvite: true
+    })
+
+    setTimeout(() => {
+      this.fadeInAnimation.opacity(1).step();
+      this.setData({
+        fadeIn: this.fadeInAnimation.export()
+      })
+    }, 200)
+
   },
 
   queryUserMap: function(res) {
     this.setData({
+      isShowInvite: false,
       avatarUrl: res.userInfo.avatarUrl,
       userInfo: res.userInfo
     })
     // 查询用户信息
-   wx.cloud.callFunction({
-      name: 'query_user_map',
-      data: {
-        nickName: res.userInfo.nickName
-      },
-      success: rst => {
-        this.setData({
-          isReady: true,
-          realName: rst.result.realName
-        })
-      }
-    })
-  },
+    wx.cloud.callFunction({
+        name: 'query_user_map',
+        data: {
+          nickName: res.userInfo.nickName
+        },
+        success: rst => {
+          this.setData({
+            isReady: true,
+            realName: rst.result.realName
+          })
+          // 查询是否已经接受邀请
+          this.checkIsInvited()
+        }
+      })
+    },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -86,10 +128,68 @@ Page({
 
   },
 
+  getUserInfo: function(res) {
+    if (res.detail && res.detail.userInfo) {
+      this.queryUserMap(res.detail)
+    }
+  },
+  checkIsInvited: async function() {
+
+     // 获取openid
+     const loginInfo = await wx.cloud.callFunction({
+      name: 'login',
+      data: {}
+    })
+
+    const rst = await wx.cloud.callFunction({
+      name: 'query_invite_user',
+      data: {
+        openid: loginInfo.result.openid
+      }
+    })
+    this.setData({
+      isShowAccept: true,
+      isInvited: rst.result.isInvited
+    })
+  },
+  // 在邀请栏中插入数据
+  onAccept: async function() {
+    // 查询是否已经接受过邀请
+
+    // 获取openid
+    const loginInfo = await wx.cloud.callFunction({
+      name: 'login',
+      data: {}
+    })
+    await wx.cloud.callFunction({
+      name: 'add_invite_user',
+      data: {
+        openid: loginInfo.result.openid,
+        nickName: this.data.userInfo.nickName,
+        realName: this.data.realName
+      }
+    })
+    this.setData({
+      isInvited: true,
+      isShowAccept: false
+    })
+  },
+
+  showMap: function() {
+    // console.log('show')
+    wx.openLocation({
+      type: 'wgs84',
+      latitude: 30.42832782422223,
+      longitude: 111.74156261295316,
+      name: '贵枝花园酒店',
+      address: '宜昌市枝江市迎宾大道91号'
+    })
+  }
+
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
+  // onShareAppMessage: function () {
+  //   // return null
+  // }
 })
