@@ -1,4 +1,4 @@
-// 接受邀请
+// 取消邀请
 const cloud = require('wx-server-sdk')
 
 cloud.init({
@@ -12,26 +12,24 @@ exports.main = async (event, context) => {
   const userInvite = db.collection('user_invite');
   const hasInvited = await userInvite.where({
     openid: _.eq(event.openid)
-  }).get()
+  })
+  .limit(1)
+  .get()
 
-  // 已经存在数据
+  // 找到存在的数据
   if (hasInvited.data && hasInvited.data.length) {
-    return {
-      isInvited: true
-    }
-  } else {
-    const rst = await userInvite.add({
+    const targetItem = hasInvited.data[0];
+    await targetItem.update({
       data: {
-        openid: event.openid,
-        nickName: event.nickName,
-        realName: event.realName,
-        // 是否接受了邀请
-        isAccepted: true
+        isAccepted: false
       }
     })
     return {
-      isInvited: true,
-      isAccepted: true
+      isFound: true
+    }
+  } else {
+    return {
+      isFound: false
     }
   }
 }

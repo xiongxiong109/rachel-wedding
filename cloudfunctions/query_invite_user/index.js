@@ -1,4 +1,4 @@
-// 云函数入口文件
+// 查询已经接受邀请的用户信息
 const cloud = require('wx-server-sdk')
 
 cloud.init({
@@ -16,12 +16,9 @@ exports.main = async (event, context) => {
   }).get()
 
   // 已经存在数据
-  if (hasInvited.data && hasInvited.data.length) {
-    return {
-      isInvited: true
-    }
-  }
+  const rst = hasInvited.data;
+  const user = rst.length ? rst[0] : {};
   return {
-    isInvited: false
+    isInvited: user.isAccepted
   }
 }

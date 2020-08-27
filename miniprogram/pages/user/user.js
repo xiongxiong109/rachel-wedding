@@ -15,8 +15,33 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    // console.log(options)
+  onLoad: async function (options) {
+    await this.setOpenId()
+    this.initUserInfo()
+    this.initAnimation()
+  },
+
+  setOpenId: async function() {
+
+    wx.showToast({
+      title: '',
+      icon: 'loading'
+    })
+
+    // 获取openid
+    const loginInfo = await wx.cloud.callFunction({
+      name: 'login',
+      data: {}
+    })
+    wx.hideToast()
+
+    this.setData({
+      loginInfo
+    })
+
+  },
+
+  initUserInfo: function() {
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -37,7 +62,6 @@ Page({
         })
       }
     })
-    this.initAnimation()
   },
 
   initAnimation: function() {
@@ -134,17 +158,10 @@ Page({
     }
   },
   checkIsInvited: async function() {
-
-     // 获取openid
-     const loginInfo = await wx.cloud.callFunction({
-      name: 'login',
-      data: {}
-    })
-
     const rst = await wx.cloud.callFunction({
       name: 'query_invite_user',
       data: {
-        openid: loginInfo.result.openid
+        openid: this.data.loginInfo.result.openid
       }
     })
     this.setData({
@@ -159,15 +176,10 @@ Page({
       title: 'loading',
       icon: 'loading'
     })
-    // 获取openid
-    const loginInfo = await wx.cloud.callFunction({
-      name: 'login',
-      data: {}
-    })
     await wx.cloud.callFunction({
       name: 'add_invite_user',
       data: {
-        openid: loginInfo.result.openid,
+        openid: this.data.loginInfo.result.openid,
         nickName: this.data.userInfo.nickName,
         realName: this.data.realName
       }
@@ -177,6 +189,23 @@ Page({
     this.setData({
       isInvited: true,
       isShowAccept: false
+    })
+  },
+
+  onCancel: async function() {
+    wx.showToast({
+      title: '正在取消',
+      icon: 'loading'
+    })
+    await wx.cloud.callFunction({
+      name: 'cancel_invite_user',
+      data: {
+        openid: this.data.loginInfo.result.openid
+      }
+    })
+    this.setData({
+      isInvited: false,
+      isShowAccept: true
     })
   },
 
