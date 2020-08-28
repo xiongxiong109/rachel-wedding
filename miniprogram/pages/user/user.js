@@ -114,6 +114,7 @@ Page({
         name: 'query_user_map',
         data: {
           nickName: res.userInfo.nickName
+          // nickName: '嗨过天'
         },
         success: rst => {
           const result = rst.result || {};
