@@ -278,5 +278,10 @@ Page({
       title: '剑桥与巧媛的婚礼邀请',
       imageUrl: '../../images/share.png'
     }
+  },
+  openWebview: function() {
+    wx.navigateTo({
+      url: '../web/web'
+    })
   }
 })

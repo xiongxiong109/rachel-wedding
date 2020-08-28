@@ -22,6 +22,7 @@
 				<text class="sub">{{poiaddr}}</text>
 			</view>
 		</view>
+    <!-- <text class="accept-tip touch-link touch-txt" bindtap="openWebview">最后请欣赏外包H5，我们的幸福时刻~</text> -->
 		<!-- 邀请按钮 -->
 		<view wx:if="{{!isInvited}}" class="invite-area">
 			<button wx:if="{{isShowAccept}}" bindtap="onAccept" class="accept-btn">朕知道了</button>
