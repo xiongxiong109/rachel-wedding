@@ -79,6 +79,12 @@ Page({
       timingFunction: 'ease-out'
     })
 
+    this.signAnimation = wx.createAnimation({
+      delay: 0,
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
+
   },
 
   showInviteBtn: function() {
@@ -111,7 +117,8 @@ Page({
         success: rst => {
           this.setData({
             isReady: true,
-            realName: rst.result.realName
+            realName: rst.result.realName,
+            signImg: rst.result.signImg
           })
           // 查询是否已经接受邀请
           this.checkIsInvited()
@@ -181,6 +188,14 @@ Page({
     })
   },
 
+  // 图片加载完成
+  onSignImgLoad: function() {
+    this.signAnimation.scale(1).rotate(10).opacity(1).step()
+    this.setData({
+      signAni: this.signAnimation.export()
+    })
+  },
+
   onLayoutEnd: function() {
     this.setData({
       isShowInvite: false
@@ -204,13 +219,15 @@ Page({
     this.setData({
       isShowAccept: false
     })
+    // console.log(this.data.avatarUrl)
     // 查询是否已经接受过邀请
     await wx.cloud.callFunction({
       name: 'add_invite_user',
       data: {
         openid: this.data.loginInfo.result.openid,
         nickName: this.data.userInfo.nickName,
-        realName: this.data.realName
+        realName: this.data.realName,
+        avatarUrl: this.data.avatarUrl
       }
     })
 
@@ -231,7 +248,7 @@ Page({
       }
     })
     wx.hideToast()
-    
+
     this.setData({
       isInvited: false,
       isShowAccept: true

@@ -133,6 +133,8 @@
 
 .accepted-area {
   text-align: center;
+  position: relative;
+  padding-top: 80rpx;
 }
 
 .cancel-btn {
@@ -143,6 +145,24 @@
 
 .loading {
   animation: loadingCircle .8s linear infinite;
+}
+
+.accept-tip {
+  color:  #2d96d3;
+  padding: 20rpx 10rpx;
+  display: block;
+}
+
+.sign-img {
+  opacity: 0;
+  width: 100rpx;
+  height: 100rpx;
+  position: absolute;
+  top: 10rpx;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform: rotate(0) scale(1.5);
 }
 
 @keyframes loadingCircle {

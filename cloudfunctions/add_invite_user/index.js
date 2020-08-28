@@ -22,7 +22,8 @@ exports.main = async (event, context) => {
       openid: _.eq(event.openid)
     }).update({
       data: {
-        isAccepted: true
+        isAccepted: true,
+        avatarUrl: event.avatarUrl || ''
       }
     })
 
@@ -36,6 +37,7 @@ exports.main = async (event, context) => {
         openid: event.openid,
         nickName: event.nickName,
         realName: event.realName,
+        avatarUrl: event.avatarUrl,
         // 是否接受了邀请
         isAccepted: true
       }

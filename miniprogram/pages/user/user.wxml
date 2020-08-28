@@ -22,6 +22,7 @@
     <text>您好, <text class="guest">{{realName}}</text>: \n</text>
     <text class="pra">真挚地邀请您参加<text class="male">熊剑桥</text>先生与<text class="female">曹巧媛</text>女士的婚礼</text>
   </view> -->
+  <text selectable>时间: 2020年10月2日, 12:00 \n</text>
   <text>宴会地点（点击下方位置查看）：</text>
   <view bindtap="showMap" class="touch-txt touch-link poi-row">
     <text class="iconfont iconposition02"></text>
@@ -39,7 +40,13 @@
     <text wx:else class="iconfont iconloading loading"></text>
   </view>
   <view wx:else class="accepted-area">
-    <text>您已接受邀请</text>
+    <image
+      src="{{signImg}}"
+      class="sign-img"
+      bindload="onSignImgLoad"
+      animation="{{signAni}}"
+    ></image>
+    <text class="accept-tip">您已接受邀请</text>
     <view class="cancel-btn">
       <text bindtap="onCancel" class="touch-txt">取消</text>
     </view>
