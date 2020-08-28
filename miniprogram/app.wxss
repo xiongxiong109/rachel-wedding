@@ -14,143 +14,44 @@ button:focus{
   outline: 0;
 }
 
+button:active {
+  filter: brightness(.8);
+}
+
 button::after{
   border: none;
 }
 
+text {
+  font-size: 32rpx;
+}
 
 page {
-  background: #e0e0e0;
+  background: #fff;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
-.userinfo, .uploader, .tunnel {
-  margin-top: 40rpx;
-  height: 140rpx;
-  width: 100%;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-left: none;
-  border-right: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  transition: all 300ms ease;
+@font-face {
+  font-family: "iconfont";
+  src: url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAOwAAsAAAAAB4wAAANhAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDBgqCbIJxATYCJAMMCwgABCAFhG0HPhu/BlGUDUqf7IsCu7HYEOBArT3hxEbFECJ6b8tmJU8mclsawdN+bd7u3r87zBok0UgU7ySTRBIN7RIJWqNBCnQv4W8tW55Whc346/IVralqr2b396/kJhvaeHAWZUBIkDgkmqNx1M4eADXBUXQCf1Ev9K/O9+wL9v/j3vFf1gKcDyinMYfNSVEYYNx5F9AaU7iEsWHsqqU4qMUEukwITLZPrm5hTYFbBeLK2RLWMnqlITO0hKpiYBGvGlrpOX0AL8Hv418WaySNDC+1e3ncwN7X2s9Lbq/bneSOznRWqMPIWAQKcVZpP7AYBRct6rLlS82JlSKkqTx1TcB3pBX5wyMJooLTe8AsCiW+1hg/UbxA4VUvlEGFFp6AN5g0YtLKLKwlBVKSoKbcREgipUm71GpUidBgXOVTKfs2nKcwlgz47Lfjn8vpj9bMtyMAJkR3kSZxbrDEkhFj6tN8iKpNkERoWmL2DCIEoVLeN/7YQGL9XiOxIGUI4bzKDomo/dZoQef/Aby6KsA/nJw7GZxcYRbcYGBQ94f+6vXlLUP9y4MzcqdxMm5ZXW3BaLC9Oy3wobxbQjT0ANkpQEN+snJDvgWQD4pGTjZTMR+txEC+hbZ2vtk85frbW0QDQntQJqSU52uWOTJ8H/kqcJEwOBpyJ/AWfTE0cBRefDu6Y0gv1Slf8CBIMn/PMKmzfc3/QHAhtK7Da01gP3C+oXbSa0VwOKC03nUC4oQ1tCXHvXEBUJeNFw/+ry3JnT+2moP31vnu8l9LooDP0jeBuFsqLYnOgv9TqqinaCJsyMWSa8wKZDv+gT+hi7ipoXvI93DnKEisoaUJICRN45C1TCKFWISGbktQaVmDLgtOh3cbJhZFaWPeK4Aw4B2SPh+QDfhECvEFDWN+oTIQi9BlL4Yn7DYdbmNLqFRqsHpBV/NgqEk3wsxrsg9dKWlRQL8n8c6DaZTkI6c0kEzRxT/aTNWgEe7xBCxHXcc4Cs+p1mimOk7j2FTdKaq5hw1bBCkp0kCVF8ipsYERhdVG4fvXiPWgU5KGnDbnPSI8Vz5KRZIOyKl86JRzK8d4j6yMUgYyBOuhE2AlHQkyNFbXmyM1FZkN8I+mYpTPdJVHyyv791sEXXCXHClyFF137J0+QM0kW+24bNxgAQAAAAA=') format('woff2');
 }
 
-.userinfo-avatar {
-  width: 100rpx;
-  height: 100rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-  background-size: cover;
-  background-color: white;
+.iconfont {
+  font-family: "iconfont" !important;
+  /* font-size: 16px; */
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.userinfo-avatar:after {
-  border: none;
+.iconposition02:before {
+  content: "\e6c4";
 }
 
-.userinfo-nickname {
-  font-size: 32rpx;
-  color: #007aff;
-  background-color: white;
-  background-size: cover;
+.iconloading:before {
+  content: "\e6a6";
 }
 
-.userinfo-nickname::after {
-  border: none;
-}
 
-.uploader, .tunnel {
-  height: auto;
-  padding: 0 0 0 40rpx;
-  flex-direction: column;
-  align-items: flex-start;
-  box-sizing: border-box;
-}
-
-.uploader-text, .tunnel-text {
-  width: 100%;
-  line-height: 52px;
-  font-size: 34rpx;
-  color: #007aff;
-}
-
-.uploader-container {
-  width: 100%;
-  height: 400rpx;
-  padding: 20rpx 20rpx 20rpx 0;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  box-sizing: border-box;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.uploader-image {
-  width: 100%;
-  height: 360rpx;
-}
-
-.tunnel {
-  padding: 0 0 0 40rpx;
-}
-
-.tunnel-text {
-  position: relative;
-  color: #222;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.tunnel-text:first-child {
-  border-top: none;
-}
-
-.tunnel-switch {
-  position: absolute;
-  right: 20rpx;
-  top: -2rpx;
-}
-
-.disable {
-  color: #888;
-}
-
-.service {
-  position: fixed;
-  right: 40rpx;
-  bottom: 40rpx;
-  width: 140rpx;
-  height: 140rpx;
-  border-radius: 50%;
-  background: linear-gradient(#007aff, #0063ce);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  transition: all 300ms ease;
-}
-
-.service-button {
-  position: absolute;
-  top: 40rpx;
-}
-
-.service:active {
-  box-shadow: none;
-}
-
-.request-text {
-  padding: 20rpx 0;
-  font-size: 24rpx;
-  line-height: 36rpx;
-  word-break: break-all;
-}

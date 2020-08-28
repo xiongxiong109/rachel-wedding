@@ -73,6 +73,87 @@
   color: rgb(131, 28, 45);
 }
 
+.touch-txt {
+  transition: .3s ease;
+}
+.touch-txt:active {
+  opacity:  .5;
+}
+
+.touch-link text {
+  color: #0086f6;
+  font-size: 32rpx;
+}
+.touch-link .sub {
+  color: #222;
+  font-size: .8em;
+}
+
+.poi-row {
+  display: flex;
+  align-items: flex-start;
+}
+.poi-row .iconfont {
+  width: 40rpx;
+  font-size: 40rpx;
+  padding-right: 10rpx;
+}
+.poi-row .iconfont::before {
+  vertical-align: middle;
+}
+.row-bar {
+  flex: 1
+}
+
+.accept-btn {
+  height: 80rpx;
+  border-radius: 80rpx;
+  color: #fff;
+  background: linear-gradient(134deg,#ffc649,#ffa000 99%);
+}
+
+/* 邀请区域 */
+.invite-area {
+  text-align: center;
+}
+
+.invite-area .iconfont {
+  font-size: 60rpx;
+  color: #ffa000;
+  display: block;
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin: auto;
+}
+
+.invite-area .iconfont::before {
+  vertical-align: 0;
+}
+
+.accepted-area {
+  text-align: center;
+}
+
+.cancel-btn {
+  font-weight: normal;
+  color: #999;
+  font-size: 24rpx;
+}
+
+.loading {
+  animation: loadingCircle .8s linear infinite;
+}
+
+@keyframes loadingCircle {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
 @keyframes scaleInOut {
   0%, 100% {
     transform: scale(1.1)

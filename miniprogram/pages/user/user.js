@@ -9,7 +9,9 @@ Page({
     isReady: false,
     isShowAccept: false, // 是否展示接受按钮
     isInvited: false,
-    userInfo: {}
+    userInfo: {},
+    poinm: '贵枝花园酒店',
+    poiaddr: '宜昌市枝江市迎宾大道91号'
   },
 
   /**
@@ -199,11 +201,10 @@ Page({
   },
   // 在邀请栏中插入数据
   onAccept: async function() {
-    // 查询是否已经接受过邀请
-    wx.showToast({
-      title: 'loading',
-      icon: 'loading'
+    this.setData({
+      isShowAccept: false
     })
+    // 查询是否已经接受过邀请
     await wx.cloud.callFunction({
       name: 'add_invite_user',
       data: {
@@ -212,11 +213,9 @@ Page({
         realName: this.data.realName
       }
     })
-    wx.hideToast();
 
     this.setData({
-      isInvited: true,
-      isShowAccept: false
+      isInvited: true
     })
   },
 
@@ -231,6 +230,8 @@ Page({
         openid: this.data.loginInfo.result.openid
       }
     })
+    wx.hideToast()
+    
     this.setData({
       isInvited: false,
       isShowAccept: true
@@ -242,8 +243,8 @@ Page({
       type: 'wgs84',
       latitude: 30.42832782422223,
       longitude: 111.74156261295316,
-      name: '贵枝花园酒店',
-      address: '宜昌市枝江市迎宾大道91号'
+      name: this.data.poinm,
+      address: this.data.poiaddr
     })
   },
 
