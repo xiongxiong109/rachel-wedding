@@ -116,13 +116,17 @@ Page({
           nickName: res.userInfo.nickName
         },
         success: rst => {
+          const result = rst.result || {};
           this.setData({
             isReady: true,
-            realName: rst.result.realName,
-            signImg: rst.result.signImg
+            realName: result.realName || '',
+            signImg: result.signImg || ''
           })
           // 查询是否已经接受邀请
           this.checkIsInvited()
+        },
+        fail: function(err) {
+          console.log(err)
         }
       })
     },
@@ -221,7 +225,6 @@ Page({
     this.setData({
       isShowAccept: false
     })
-    // console.log(this.data.avatarUrl)
     // 查询是否已经接受过邀请
     await wx.cloud.callFunction({
       name: 'add_invite_user',
@@ -271,6 +274,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    // return null
+    return {
+      title: '剑桥与巧媛的婚礼邀请',
+      imageUrl: '../../images/share.png'
+    }
   }
 })

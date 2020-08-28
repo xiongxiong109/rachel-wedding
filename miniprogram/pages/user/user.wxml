@@ -1,60 +1,44 @@
 <!-- loading layout -->
 <view class="loading-layout"></view>
 <!-- 封面 -->
-<view
-  class="index-page"
-  wx-if="{{isShowInvite}}"
-  animation="{{indexAni}}"
-  bind:transitionend="onLayoutEnd"
->
-  <image src="../../images/layout.png" class="layout-img" mode="aspectFill"></image>
-  <button
-    open-type="getUserInfo"
-    bindgetuserinfo="getUserInfo"
-    class="open-btn"
-    animation="{{fadeIn}}"
-  >启</button>
-  <text class="open-tip">来自熊剑桥的邀请</text>
+<view class="index-page" wx-if="{{isShowInvite}}" animation="{{indexAni}}" bind:transitionend="onLayoutEnd">
+	<image src="../../images/layout.png" class="layout-img" mode="aspectFill"></image>
+	<button open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="open-btn" animation="{{fadeIn}}">启</button>
+	<text class="open-tip">来自熊剑桥的邀请</text>
 </view>
+<!-- 请柬背景 -->
+<image wx:if="{{isReady}}" src="../../images/invite_bg.jpg" class="invite-layout"></image>
 <!-- 邀请正文 -->
 <view wx:if="{{isReady}}">
-  <!-- <view class="poster" wx:if="{{isReady}}">
-    <text>您好, <text class="guest">{{realName}}</text>: \n</text>
-    <text class="pra">真挚地邀请您参加<text class="male">熊剑桥</text>先生与<text class="female">曹巧媛</text>女士的婚礼</text>
-  </view> -->
-  <text selectable>时间: 2020年10月2日, 12:00 \n</text>
-  <text>宴会地点（点击下方位置查看）：</text>
-  <view bindtap="showMap" class="touch-txt touch-link poi-row">
-    <text class="iconfont iconposition02"></text>
-    <view class="row-bar">
-      <text>{{poinm}} \n</text>
-      <text class="sub">{{poiaddr}}</text>
-    </view>
-  </view>
-  <view wx:if="{{!isInvited}}" class="invite-area">
-     <button
-      wx:if="{{isShowAccept}}"
-      bindtap="onAccept"
-      class="accept-btn"
-    >朕知道了</button>
-    <text wx:else class="iconfont iconloading loading"></text>
-  </view>
-  <view wx:else class="accepted-area">
-    <text
+	<view class="poster" wx:if="{{isReady}}">
+		<text class="row-line">您好, <text class="guest">{{realName || userInfo.nickName}}</text>: \n</text>
+		<text class="pra row-line">真挚地邀请您参加<text class="male">熊剑桥</text>先生与<text class="female">曹巧媛</text>女士的婚礼。 \n</text>
+		<text selectable class="row-line">举行时间: <text style="font-weight: bold;">2020年10月2日, 12:00</text>\n</text>
+		<text class="row-line">宴会地点（点击下方位置查看）：</text>
+		<view bindtap="showMap" class="touch-txt touch-link poi-row">
+			<text class="iconfont iconposition02"></text>
+			<view class="row-bar">
+				<text>{{poinm}} \n</text>
+				<text class="sub">{{poiaddr}}</text>
+			</view>
+		</view>
+		<!-- 邀请按钮 -->
+		<view wx:if="{{!isInvited}}" class="invite-area">
+			<button wx:if="{{isShowAccept}}" bindtap="onAccept" class="accept-btn">朕知道了</button>
+			<text wx:else class="iconfont iconloading loading"></text>
+		</view>
+		<view wx:else class="accepted-area">
+			<text
       class="iconfont iconloading loading"
-      wx:if="{{!isImgLoad}}"
+      wx:if="{{!isImgLoad && signImg}}"
     ></text>
-    <image
-      src="{{signImg}}"
-      class="sign-img"
-      bindload="onSignImgLoad"
-      animation="{{signAni}}"
-    ></image>
-    <text class="accept-tip">您已接受邀请</text>
-    <view class="cancel-btn">
-      <text bindtap="onCancel" class="touch-txt">取消</text>
-    </view>
-  </view>
+			<image src="{{signImg}}" class="sign-img" bindload="onSignImgLoad" animation="{{signAni}}"></image>
+			<text class="accept-tip">您已接受邀请</text>
+			<view class="cancel-btn">
+				<text bindtap="onCancel" class="touch-txt">取消</text>
+			</view>
+		</view>
+		<!-- 轮播组件 -->
+		<loop-pop />
+	</view>
 </view>
-<!-- 轮播组件 -->
-<loop-pop />

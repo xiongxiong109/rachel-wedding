@@ -19,12 +19,17 @@ Component({
    * 组件的初始数据
    */
   data: {
-    userList: []
+    userList: [],
+    curIndex: 0
   },
 
   attached: async function() {
     await this.queryInviteList();
     this.initDbWatcher()
+  },
+  detached: function() {
+    // 关闭对数据库的监听
+    this.dbWatcher && this.dbWatcher.close();
   },
   /**
    * 组件的方法列表
@@ -40,26 +45,23 @@ Component({
         userList: data
       })
     },
-    initDbWatcher: async function() {
- 
+    initDbWatcher: function() {
+      const _view = this;
       // 监听数据变化推送
-      const db = wx.cloud.database({
-        env: 'dev-615384'
-      });
-
-      const _ = db.command
-      const rst = await db.collection('user_invite').where({
-        isAccepted: _.eq(true)
-      }).get()
-      console.log(rst)
-      // db.collection('user_invite').where({}).watch({
-      //   onChange: function(rst) {
-      //     console.log(rst)
-      //   },
-      //   onError: function(err) {
-      //     console.log(err)
-      //   }
-      // })
+      const db = wx.cloud.database();
+      this.dbWatcher = db.collection('user_invite').where({
+        isAccepted: true
+      }).watch({
+        onChange: function(rst) {
+          _view.setData({
+            userList: rst.docs,
+            curIndex: 0
+          })
+        },
+        onError: function(err) {
+          console.log(err)
+        }
+      })
     }
   }
 })

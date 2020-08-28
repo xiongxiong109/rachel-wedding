@@ -1,9 +1,23 @@
 <!--用户列表轮播组件-->
 <view class="loop-wrapper" wx:if="{{userList.length}}">
-  <view wx:for="{{userList}}" wx:key="_id">
-    <view class="loop-item-row">
-      <image class="avatar" wx:if="{{item.avatarUrl}}" src="{{item.avatarUrl}}"></image>
-      <text>{{item.realName}} 已应邀</text>
-    </view>
-  </view>
+	<swiper
+    autoplay="{{true}}"
+    interval="{{3000}}"
+    duration="{{1000}}"
+    circular="{{true}}"
+    vertical="{{true}}"
+    easing-function="easeOutCubic"
+    class="loop-swiper"
+    current="{{curIndex}}"
+    display-multiple-items="{{2}}"
+  >
+		<block wx:for="{{userList}}" wx:key="_id">
+			<swiper-item>
+				<view class="loop-item-row">
+					<image class="avatar" wx:if="{{item.avatarUrl}}" src="{{item.avatarUrl}}"></image>
+					<text>{{item.realName || item.nickName}} 已应邀</text>
+				</view>
+			</swiper-item>
+		</block>
+	</swiper>
 </view>

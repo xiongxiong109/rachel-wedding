@@ -23,6 +23,8 @@ exports.main = async (event, context) => {
     }).update({
       data: {
         isAccepted: true,
+        realName: event.realName,
+        nickName: event.nickName,
         avatarUrl: event.avatarUrl || ''
       }
     })
