@@ -1,5 +1,5 @@
 <!--用户列表轮播组件-->
-<view>
+<view class="loop-wrapper" wx:if="{{userList.length}}">
   <view wx:for="{{userList}}" wx:key="_id">
     <view class="loop-item-row">
       <image class="avatar" wx:if="{{item.avatarUrl}}" src="{{item.avatarUrl}}"></image>

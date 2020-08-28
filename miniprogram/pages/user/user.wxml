@@ -57,6 +57,4 @@
   </view>
 </view>
 <!-- 轮播组件 -->
-<loop-pop
-  isupdate="{{isInvited}}"
-/>
+<loop-pop />
