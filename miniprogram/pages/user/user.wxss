@@ -137,6 +137,20 @@
   padding-top: 80rpx;
 }
 
+.accepted-area .loading {
+  display: block;
+  opacity: 0.5;
+  color: #ccc;
+  width: 50rpx;
+  height: 50rpx;
+  font-size: 50rpx;
+  margin: auto;
+  position: absolute;
+  top: 30rpx;
+  left: 0;
+  right: 0;
+}
+
 .cancel-btn {
   font-weight: normal;
   color: #999;

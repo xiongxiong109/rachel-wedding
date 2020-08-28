@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "loop-pop": "../../components/loop_pop/loop_pop"
+  }
 }

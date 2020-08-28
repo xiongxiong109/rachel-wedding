@@ -40,6 +40,10 @@
     <text wx:else class="iconfont iconloading loading"></text>
   </view>
   <view wx:else class="accepted-area">
+    <text
+      class="iconfont iconloading loading"
+      wx:if="{{!isImgLoad}}"
+    ></text>
     <image
       src="{{signImg}}"
       class="sign-img"
@@ -52,3 +56,7 @@
     </view>
   </view>
 </view>
+<!-- 轮播组件 -->
+<loop-pop
+  isupdate="{{isInvited}}"
+/>

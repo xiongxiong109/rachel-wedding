@@ -1,0 +1,18 @@
+/* components/loop_pop/loop_pop.wxss */
+.loop-item-row {
+  display: inline-block;
+  font-size: 36rpx;
+  line-height: 1.2em;
+  padding: 10rpx 30rpx;
+  border-radius: 50rpx;
+  background-color: rgba(147, 172, 145, 0.6);
+  margin-bottom: 10rpx;
+  color: #fff;
+}
+.avatar {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+  vertical-align: middle;
+}

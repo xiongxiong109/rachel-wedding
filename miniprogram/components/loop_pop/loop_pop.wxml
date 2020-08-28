@@ -1,0 +1,9 @@
+<!--用户列表轮播组件-->
+<view>
+  <view wx:for="{{userList}}" wx:key="_id">
+    <view class="loop-item-row">
+      <image class="avatar" wx:if="{{item.avatarUrl}}" src="{{item.avatarUrl}}"></image>
+      <text>{{item.realName}} 已应邀</text>
+    </view>
+  </view>
+</view>

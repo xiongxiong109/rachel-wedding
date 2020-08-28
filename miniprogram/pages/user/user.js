@@ -10,6 +10,7 @@ Page({
     isShowAccept: false, // 是否展示接受按钮
     isInvited: false,
     userInfo: {},
+    isImgLoad: false, // 图片是否加载完成
     poinm: '贵枝花园酒店',
     poiaddr: '宜昌市枝江市迎宾大道91号'
   },
@@ -192,6 +193,7 @@ Page({
   onSignImgLoad: function() {
     this.signAnimation.scale(1).rotate(10).opacity(1).step()
     this.setData({
+      isImgLoad: true,
       signAni: this.signAnimation.export()
     })
   },
