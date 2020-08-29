@@ -295,6 +295,15 @@ Page({
     })
   },
 
+  openCtrip: function() {
+    const astation = encodeURIComponent('枝江北')
+    const ddate = '2020-10-1';
+    wx.navigateToMiniProgram({
+      appId: 'wx0e6ed4f51db9d078',
+      path: `pages/train/index/index?astation=${astation}&ddate=${ddate}`
+    })
+  },
+
   /**
    * 用户点击右上角分享
    */

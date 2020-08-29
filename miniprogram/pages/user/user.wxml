@@ -14,7 +14,8 @@
 		<text class="row-line" wx:if="{{isReady}}">送呈<text class="guest">{{realName || userInfo.nickName}}</text>台启: \n</text>
 		<text class="row-line">诚邀您参加<text class="male">熊剑桥</text>先生与<text class="female">曹巧媛</text>女士的婚礼。 \n</text>
 		<text class="row-line">人生难得一知己，我们的幸福时刻需要您的祝福与见证~</text>
-		<text selectable class="row-line">举行时间: <text style="font-weight: bold;">2020年10月2日, 中午12时。</text>\n</text>
+		<text selectable class="row-line">举行时间: <text style="font-weight: bold;">2020年10月2日, 12:00。</text>\n</text>
+		<text class="row-line touch-link" bindtap="openCtrip">轨道交通： <text class="touch-txt">枝江北站</text>\n</text>
 		<text class="row-line">宴会地点（点击查看）：</text>
 		<view bindtap="showMap" class="touch-txt touch-link poi-row">
 			<text class="iconfont iconposition02"></text>
