@@ -7,14 +7,15 @@
 	<text class="open-tip">来自熊剑桥的邀请</text>
 </view>
 <!-- 请柬背景 -->
-<image wx:if="{{isReady}}" src="../../images/invite_bg.jpg" class="invite-layout"></image>
+<image wx:show="{{!isShowInvite}}" src="../../images/invite_bg.jpg" class="invite-layout"></image>
 <!-- 邀请正文 -->
-<view wx:if="{{isReady}}">
-	<view class="poster" wx:if="{{isReady}}">
-		<text class="row-line">您好, <text class="guest">{{realName || userInfo.nickName}}</text>: \n</text>
-		<text class="pra row-line">真挚地邀请您参加<text class="male">熊剑桥</text>先生与<text class="female">曹巧媛</text>女士的婚礼。 \n</text>
-		<text selectable class="row-line">举行时间: <text style="font-weight: bold;">2020年10月2日, 12:00</text>\n</text>
-		<text class="row-line">宴会地点（点击下方位置查看）：</text>
+<view wx:if="{{!isShowInvite}}}">
+	<view class="poster">
+		<text class="row-line" wx:if="{{isReady}}">送呈<text class="guest">{{realName || userInfo.nickName}}</text>台启: \n</text>
+		<text class="row-line">诚邀您参加<text class="male">熊剑桥</text>先生与<text class="female">曹巧媛</text>女士的婚礼。 \n</text>
+		<text class="row-line">人生难得一知己，我们的幸福时刻需要您的祝福与见证~</text>
+		<text selectable class="row-line">举行时间: <text style="font-weight: bold;">2020年10月2日, 中午12时。</text>\n</text>
+		<text class="row-line">宴会地点（点击查看）：</text>
 		<view bindtap="showMap" class="touch-txt touch-link poi-row">
 			<text class="iconfont iconposition02"></text>
 			<view class="row-bar">
@@ -22,7 +23,6 @@
 				<text class="sub">{{poiaddr}}</text>
 			</view>
 		</view>
-    <!-- <text class="accept-tip touch-link touch-txt" bindtap="openWebview">最后请欣赏外包H5，我们的幸福时刻~</text> -->
 		<!-- 邀请按钮 -->
 		<view wx:if="{{!isInvited}}" class="invite-area">
 			<button wx:if="{{isShowAccept}}" bindtap="onAccept" class="accept-btn">朕知道了</button>
@@ -36,8 +36,14 @@
 			<image src="{{signImg}}" class="sign-img" bindload="onSignImgLoad" animation="{{signAni}}"></image>
 			<text class="accept-tip">您已接受邀请</text>
 			<view class="cancel-btn">
-				<text bindtap="onCancel" class="touch-txt">取消</text>
+				<text bindtap="onClickCancelBtn" class="touch-txt">取消</text>
 			</view>
+			<mp-actionsheet
+				show="{{isShowCancelResist}}"
+				title="{{cancelResistData.title}}"
+				actions="{{cancelResistData.groups}}"
+				bindactiontap="onCancel"
+			/>
 		</view>
 		<!-- 轮播组件 -->
 		<loop-pop />

@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "loop-pop": "../../components/loop_pop/loop_pop"
+    "loop-pop": "../../components/loop_pop/loop_pop",
+    "mp-actionsheet": "/miniprogram_npm/weui-miniprogram/actionsheet/actionsheet"
   }
 }

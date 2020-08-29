@@ -5,14 +5,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isShowInvite: false, // 是否展示邀请按钮
+    isShowInvite: true, // 是否展示邀请按钮
     isReady: false,
     isShowAccept: false, // 是否展示接受按钮
     isInvited: false,
     userInfo: {},
     isImgLoad: false, // 图片是否加载完成
     poinm: '贵枝花园酒店',
-    poiaddr: '宜昌市枝江市迎宾大道91号'
+    poiaddr: '宜昌市枝江市迎宾大道91号',
+    isShowCancelResist: false, // 是否展示挽留弹框
+    cancelResistData: {
+      title: '我们期待您的到来，您真的希望取消邀约吗',
+      groups: [
+        { value: true, text: '我意已决', type: 'warn' }
+      ]
+    }
   },
 
   /**
@@ -210,6 +217,8 @@ Page({
   },
 
   checkIsInvited: async function() {
+    // 如果已经受邀了，主动开启封面
+    this.animateOutIndex()
     const rst = await wx.cloud.callFunction({
       name: 'query_invite_user',
       data: {
@@ -242,7 +251,17 @@ Page({
     })
   },
 
-  onCancel: async function() {
+  onClickCancelBtn: function() {
+    this.setData({
+      isShowCancelResist: true
+    })
+  },
+
+  onCancel: async function(rst) {
+    if (!rst.detail.value) {
+      return
+    }
+    this.setData({ isShowCancelResist: false })
     wx.showToast({
       title: '正在取消',
       icon: 'loading'
@@ -279,10 +298,5 @@ Page({
       title: '剑桥与巧媛的婚礼邀请',
       imageUrl: '../../images/share.png'
     }
-  },
-  openWebview: function() {
-    wx.navigateTo({
-      url: '../web/web'
-    })
   }
 })
