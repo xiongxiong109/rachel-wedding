@@ -125,6 +125,8 @@ Page({
         data: {
           nickName: res.userInfo.nickName
           // nickName: '嗨过天'
+          // nickName: '夏忠胜'
+          // nickName: '嗨过天'
         },
         success: rst => {
           const result = rst.result || {};
