@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    indexTxt: true,
     isShowInvite: true, // 是否展示邀请按钮
     isReady: false,
     isShowAccept: false, // 是否展示接受按钮
@@ -25,16 +26,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: async function (options) {
-    await this.setOpenId()
-    this.initUserInfo()
-    this.initAnimation()
-  },
+  // onLoad: async function (options) {
+  //   await this.setOpenId()
+  // },
 
   setOpenId: async function() {
 
     wx.showToast({
-      title: '熊仔正在初始化',
+      title: '熊仔running',
       icon: 'loading'
     })
 
@@ -116,6 +115,10 @@ Page({
       avatarUrl: res.userInfo.avatarUrl,
       userInfo: res.userInfo
     })
+
+    // 动开启封面
+    this.animateOutIndex()
+
     // 查询用户信息
     wx.cloud.callFunction({
         name: 'query_user_map',
@@ -149,8 +152,10 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow: async function () {
+    await this.setOpenId()
+    this.initUserInfo()
+    this.initAnimation()
   },
 
   /**
@@ -181,6 +186,7 @@ Page({
 
   },
 
+  // 点击开启按钮后触发
   getUserInfo: function(res) {
     if (res.detail && res.detail.userInfo) {
       this.animateOutIndex();
@@ -196,6 +202,7 @@ Page({
     }).step()
 
     this.setData({
+      indexTxt: false,
       indexAni: this.indexAnimation.export(),
       fadeIn: this.fadeInAnimation.export()
     })
@@ -217,8 +224,6 @@ Page({
   },
 
   checkIsInvited: async function() {
-    // 如果已经受邀了，主动开启封面
-    this.animateOutIndex()
     const rst = await wx.cloud.callFunction({
       name: 'query_invite_user',
       data: {

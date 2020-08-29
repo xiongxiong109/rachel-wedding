@@ -4,7 +4,7 @@
 <view class="index-page" wx-if="{{isShowInvite}}" animation="{{indexAni}}" bind:transitionend="onLayoutEnd">
 	<image src="../../images/layout.png" class="layout-img" mode="aspectFill"></image>
 	<button open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="open-btn" animation="{{fadeIn}}">启</button>
-	<text class="open-tip">来自熊剑桥的邀请</text>
+	<text class="open-tip" wx:if="{{indexTxt}}">来自熊剑桥的邀请</text>
 </view>
 <!-- 请柬背景 -->
 <image wx:show="{{!isShowInvite}}" src="../../images/invite_bg.jpg" class="invite-layout"></image>
